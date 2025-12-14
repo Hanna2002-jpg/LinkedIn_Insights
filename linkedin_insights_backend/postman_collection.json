@@ -1,0 +1,392 @@
+{
+  "info": {
+    "name": "LinkedIn Insights Microservice",
+    "description": "API collection for LinkedIn Insights Microservice - Fetch and analyze LinkedIn Page data",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8000",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "Health Check",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/health"
+          }
+        },
+        {
+          "name": "Root",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Pages",
+      "item": [
+        {
+          "name": "Get All Pages",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/pages/?page=1&page_size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "pages", ""],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "page_size", "value": "10"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Pages by Follower Range",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/pages/?min_followers=20000&max_followers=40000",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "pages", ""],
+              "query": [
+                {"key": "min_followers", "value": "20000"},
+                {"key": "max_followers", "value": "40000"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Pages by Name",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/pages/?name=google",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "pages", ""],
+              "query": [
+                {"key": "name", "value": "google"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Filter Pages by Industry",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/pages/?industry=Technology",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "pages", ""],
+              "query": [
+                {"key": "industry", "value": "Technology"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Page by ID",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/pages/deepsolv",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "pages", "deepsolv"]
+            },
+            "description": "Get page details. If not in DB, fetches from LinkedIn."
+          }
+        },
+        {
+          "name": "Get Page (No Auto-Fetch)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/pages/deepsolv?fetch_if_missing=false",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "pages", "deepsolv"],
+              "query": [
+                {"key": "fetch_if_missing", "value": "false"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Refresh Page Data",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/pages/deepsolv/refresh",
+            "description": "Force refresh page data from LinkedIn"
+          }
+        },
+        {
+          "name": "Get Page Posts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/pages/deepsolv/posts?page=1&page_size=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "pages", "deepsolv", "posts"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "page_size", "value": "15"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Page Followers",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/pages/deepsolv/followers?page=1&page_size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "pages", "deepsolv", "followers"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "page_size", "value": "10"}
+              ]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Posts",
+      "item": [
+        {
+          "name": "Get All Posts",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/posts/?page=1&page_size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "posts", ""],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "page_size", "value": "10"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Posts by Page",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/posts/?page_id=deepsolv",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "posts", ""],
+              "query": [
+                {"key": "page_id", "value": "deepsolv"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Posts by Content Type",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/posts/?content_type=image",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "posts", ""],
+              "query": [
+                {"key": "content_type", "value": "image"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Posts with Min Likes",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/posts/?min_likes=100",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "posts", ""],
+              "query": [
+                {"key": "min_likes", "value": "100"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Post by ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/posts/{post_id}"
+          }
+        },
+        {
+          "name": "Get Post Comments",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/posts/{post_id}/comments?page=1&page_size=20",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "posts", "{post_id}", "comments"],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "page_size", "value": "20"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Recent Posts (10-15)",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/posts/recent/deepsolv?limit=15",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "posts", "recent", "deepsolv"],
+              "query": [
+                {"key": "limit", "value": "15"}
+              ]
+            },
+            "description": "Get recent 10-15 posts for a page"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Employees",
+      "item": [
+        {
+          "name": "Get All Employees",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employees/?page=1&page_size=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employees", ""],
+              "query": [
+                {"key": "page", "value": "1"},
+                {"key": "page_size", "value": "10"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Search Employees by Name",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employees/?name=John",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employees", ""],
+              "query": [
+                {"key": "name", "value": "John"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Filter Employees by Title",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employees/?title=Engineer",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employees", ""],
+              "query": [
+                {"key": "title", "value": "Engineer"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Employee by LinkedIn ID",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/employees/{linkedin_id}"
+          }
+        },
+        {
+          "name": "Get Employees by Page",
+          "request": {
+            "method": "GET",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/employees/by-page/deepsolv?employee_type=all",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "employees", "by-page", "deepsolv"],
+              "query": [
+                {"key": "employee_type", "value": "all"}
+              ]
+            },
+            "description": "Filter options: all, employees, followers, following"
+          }
+        }
+      ]
+    },
+    {
+      "name": "AI Summary",
+      "item": [
+        {
+          "name": "Generate Full AI Summary",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/ai/summary/deepsolv?include_posts=true&include_employees=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "ai", "summary", "deepsolv"],
+              "query": [
+                {"key": "include_posts", "value": "true"},
+                {"key": "include_employees", "value": "true"}
+              ]
+            },
+            "description": "Generate comprehensive AI summary using ChatGPT"
+          }
+        },
+        {
+          "name": "Force Refresh AI Summary",
+          "request": {
+            "method": "POST",
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/ai/summary/deepsolv?force_refresh=true",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "ai", "summary", "deepsolv"],
+              "query": [
+                {"key": "force_refresh", "value": "true"}
+              ]
+            }
+          }
+        },
+        {
+          "name": "Get Quick Summary",
+          "request": {
+            "method": "GET",
+            "url": "{{baseUrl}}/api/v1/ai/quick-summary/deepsolv",
+            "description": "Fast summary with key stats (no AI call)"
+          }
+        },
+        {
+          "name": "Compare Pages",
+          "request": {
+            "method": "POST",
+            "url": "{{baseUrl}}/api/v1/ai/compare",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "[\"deepsolv\", \"google\", \"microsoft\"]"
+            },
+            "description": "Compare 2-5 LinkedIn pages using AI"
+          }
+        }
+      ]
+    }
+  ]
+}
